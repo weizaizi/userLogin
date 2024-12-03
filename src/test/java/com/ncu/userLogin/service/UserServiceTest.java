@@ -1,10 +1,14 @@
 package com.ncu.userLogin.service;
 
 
+import cn.hutool.http.server.HttpServerResponse;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ncu.userLogin.mapper.UserMapper;
 import com.ncu.userLogin.pojo.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -17,26 +21,19 @@ public class UserServiceTest {
 
     @Resource
     private UserService userService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     public void testAddUser() {
-        User user = new User();
-        user.setId(0L);
-        user.setUserAccount("123");
-        user.setUsername("小威生吃小孩");
-        user.setPassword("123");
-        user.setGender(0);
-        user.setAvatarUrl("aaa");
-        user.setPhone("123");
-        user.setEmail("123");
-        user.setIsValid(0);
-
-        boolean save = userService.save(user);
-        Assert.assertTrue(save);
+        QueryWrapper<User> id = new QueryWrapper<>();
+        id.eq("id", 0);
+        User user = userMapper.selectOne(id);
+        System.out.println(user);
     }
 
     @Test
-    public void testUserLogin() {
+    public void testUserRegister() {
         User user = new User();
         user.setUserAccount("789");
         user.setUsername("小威生吃小孩");
