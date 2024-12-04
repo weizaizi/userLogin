@@ -1,8 +1,5 @@
 package com.ncu.userLogin.pojo;
 
-import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -67,12 +64,10 @@ public class User implements Serializable {
     /**
      * 更新时间
      */
-    private Date updateTime;
 
     /**
      * 账户是否存在
      */
-    @TableLogic
     private Integer isDelete;
 
     @TableField(exist = false)
